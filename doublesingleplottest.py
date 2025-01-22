@@ -1,0 +1,22 @@
+import matplotlib.pyplot as plt
+import numpy as np
+fh1 = open('single-slit.txt', 'r')
+fh2 = open('double-slit.txt', 'r')
+fh3 = open('double-slit2.txt', 'r')
+fh4 = open('doublesing.txt', 'r')
+data1 = fh1.read().splitlines()
+data1 = np.array([np.array(list(map(float,line.split()))) for line in data1])
+data2 = fh2.read().splitlines()
+data2 = np.array([np.array(list(map(float,line.split()))) for line in data2])
+# data3 = fh3.read().splitlines()
+# data3 = np.array([np.array(list(map(float,line.split()))) for line in data3])
+# data4 = fh4.read().splitlines()
+# data4 = np.array([np.array(list(map(float,line.split()))) for line in data4])
+fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(10,20), dpi=300)
+for i in [0,1]:
+    ax[i].set_xlabel("Position [m]")
+    ax[i].set_ylabel("Light Intensity [%]")
+ax[0].plot(data1[:,0], data1[:,1])
+ax[1].plot(data2[:,0], data2[:,1])
+fig.savefig("slits.pdf")
+plt.show()
